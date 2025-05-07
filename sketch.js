@@ -6,10 +6,6 @@ let zoomStep = 0; // exponent
 let zoom = 1; // starts at 1 bc x^0 = 1
 let scaleFactors; // x, y
 
-function preload() {
-    mandelbrotShader = loadShader('shader.vert', 'shader.frag');
-}
-
 function getNewScaleFactors(width, height, scale) {
     const aspect_ratio_x = width;
     const aspect_ratio_y = height;
@@ -27,7 +23,9 @@ function getNewScaleFactors(width, height, scale) {
     return [scaleX, scaleY];
 }
 
-function setup() {
+async function setup() {
+    mandelbrotShader = await loadShader('shader.vert', 'shader.frag');
+
     const border = 16;
     createCanvas(windowWidth - border, windowHeight - border, WEBGL);
 
